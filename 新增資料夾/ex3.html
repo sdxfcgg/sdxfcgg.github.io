@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>問題</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>傳說問題</h1>
+    <div id="content" onclick="showContent()">
+        <p>立即開始</p>
+    </div>
+    
+    <div id="imageAndOptions" class="hidden">
+        <img id="displayedImage" src="問題/1.jpg" alt="示例圖片">
+        <p>請選擇下列的選項：</p>
+        <button onclick="handleOption(1)">1</button> <!-- 代號為 A -->
+        <button onclick="handleOption(2)">2</button> <!-- 代號為 B -->
+        <button onclick="handleOption(3)">3</button> <!-- 代號為 C -->
+        <button onclick="handleOption(4)">4</button> <!-- 代號為 D -->
+    </div>
+
+    <script>
+        var imageQuestions = [
+            { 
+                imageUrl: '問題/1.jpg', 
+                correctAnswer: 3  
+            },
+            { 
+                imageUrl: '問題/2.jpg', 
+                correctAnswer: 2  
+            },
+            { 
+                imageUrl: '問題/3.jpg', 
+                correctAnswer: 2  
+            },
+			{ 
+                imageUrl: '問題/4.jpg', 
+                correctAnswer: 4  
+            },
+			{ 
+                imageUrl: '問題/5.jpg', 
+                correctAnswer: 2  
+            },
+			{ 
+                imageUrl: '問題/6.jpg', 
+                correctAnswer: 2  
+            },
+			{ 
+                imageUrl: '問題/7.jpg', 
+                correctAnswer: 3  
+            },
+			{ 
+                imageUrl: '問題/8.jpg', 
+                correctAnswer: 4  
+            },
+			{ 
+                imageUrl: '問題/9.jpg', 
+                correctAnswer: 1  
+            },
+			{ 
+                imageUrl: '問題/10.jpg', 
+                correctAnswer: 2  
+            },
+			{ 
+                imageUrl: '問題/11.jpg', 
+                correctAnswer: 4  
+            },
+            
+        ];
+        var currentImageIndex = 0;
+        var displayedImage = document.getElementById('displayedImage');
+        var correctAnswersCount = 0; 
+
+        function showContent() {
+            var content = document.getElementById('imageAndOptions');
+            content.classList.remove('hidden');
+            var originalContent = document.getElementById('content');
+            originalContent.style.display = 'none';
+            displayImageAndOptions();
+        }
+
+        function handleOption(option) {
+            var selectedQuestion = imageQuestions[currentImageIndex];
+            if (option === selectedQuestion.correctAnswer) {
+                correctAnswersCount++; 
+            }
+
+            if (currentImageIndex === imageQuestions.length - 1) { 
+                alert("可憐!只有答對: " + correctAnswersCount);
+                return;
+            }
+
+            currentImageIndex = (currentImageIndex + 1) % imageQuestions.length;
+            displayImageAndOptions();
+        }
+
+        function displayImageAndOptions() {
+            displayedImage.src = imageQuestions[currentImageIndex].imageUrl;
+        }
+    </script>
+</body>
+</html>
